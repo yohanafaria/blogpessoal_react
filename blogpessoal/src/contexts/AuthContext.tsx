@@ -1,6 +1,8 @@
 import { createContext, ReactNode, useState } from "react";
 import UsuarioLogin from "../models/UsuarioLogin";
 import { login } from "../services/Service";
+import { ToastAlerta } from "../utils/ToastAlerta";
+
 
 /**
  * Criamos a Interface AuthContextProps com as propriedades que serão 
@@ -86,9 +88,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
         try {
             await login(`/usuarios/logar`, usuarioLogin, setUsuario);
-            alert("Usuário autenticado com sucesso!");
+            ToastAlerta("Usuário autenticado com sucesso!", "sucesso");
         } catch (error) {
-            alert("Dados do Usuário inconsistentes!");
+            ToastAlerta("Dados do Usuário inconsistentes!", "erro");
         }
         
         setIsLoading(false);
@@ -125,4 +127,4 @@ export function AuthProvider({ children }: AuthProviderProps) {
     )
 }
 
-export default AuthContext
+export default AuthContext;
